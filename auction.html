@@ -1,0 +1,408 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Aucशन</title>
+    <link rel="icon" href="..\Untitled83_20230929164433.png">
+    <link rel="stylesheet" type="text/css" href="parallax.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+</head>
+
+<body>
+
+  <style>
+    .custom-btn {
+      z-index: 100;
+      display: inline-block;
+      padding: 8px 16px;
+      background-color: rgb(0, 0, 0);
+      color: rgb(255, 255, 255);
+      text-decoration: none;
+      transition: background-color 0.3s, color 0.3s;
+      border-radius: 5px;
+    }
+
+    .custom-btn:hover {
+      background-color: rgb(255, 255, 255);
+      color: rgb(0, 0, 0);
+    }
+
+    .overlay {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.5);
+      justify-content: center;
+      align-items: center;
+      z-index: 100
+    }
+
+    .popup {
+      background-color: rgb(255, 255, 255);
+      padding: 20px;
+      width: 400px;
+      margin: 0 auto;
+      display: none;
+      z-index: 100;
+      border-radius: 10px;
+    }
+  </style>
+
+  <nav class="navbar2 bg-body-tertiary">
+    <form class="container-fluid d-flex justify-content-end">
+
+      <a class="custom-btn rounded mt-2 me-2" id="loginButton">Log In</a>
+      
+      <a class="custom-btn btn-sm rounded mt-2 ms-2" id="signupButton">Sign Up</a>
+    </form>
+  </nav>
+
+  <!-- Script to load the login popup -->
+  <script>
+    document.getElementById('loginButton').addEventListener('click', function () {
+
+      fetch('/login popup.html')
+        .then(response => response.text())
+        .then(data => {
+          document.body.insertAdjacentHTML('beforeend', data);
+          document.getElementById('overlay').style.display = 'flex';
+          document.getElementById('loginPopup').style.display = 'block';
+        })
+        .catch(error => console.error('Error loading login popup content:', error));
+    });
+  </script>
+
+  <!-- Script to load the signup popup -->
+  <script>
+    document.getElementById('signupButton').addEventListener('click', function () {
+
+      fetch('http://127.0.0.1:5501/signup%20popup.html')
+        .then(response => response.text())
+        .then(data => {
+          document.body.insertAdjacentHTML('beforeend', data);
+          document.getElementById('overlay').style.display = 'flex';
+          document.getElementById('signupPopup').style.display = 'block';
+        })
+        .catch(error => console.error('Error loading signup popup content:', error));
+    });
+  </script>
+
+  <!-- JavaScript to hide the popup when clicking outside of it -->
+  <script>
+    document.addEventListener('click', function (event) {
+      if (event.target.closest('.overlay') && !event.target.closest('.popup')) {
+        document.querySelector('.overlay').style.display = 'none';
+        document.querySelector('.popup').style.display = 'none';
+      }
+    });
+  </script>
+  
+<!-- NAVBAR -->
+
+<style>
+    .navbar {
+      background-color: #ffffff;
+    }
+  
+    .navbar-brand {
+      font-weight: bold;
+      font-size: 24px;
+      margin-right: 90px;
+      font-family: 'Arial Black', sans-serif;
+      color: rgb(0, 0, 0);
+    }
+  
+    .navbar-brand img {
+      width: 40px;
+      height: 32px;
+    }
+  
+    .navbar-nav .nav-link {
+      font-family: 'Times New Roman', serif;
+      font-size: 20px;
+      color: rgb(86, 49, 41);
+    }
+  
+    .navbar-nav .nav-link:hover {
+      text-decoration: underline;
+    }
+  
+    .form-control {
+      width: 250px;
+      font-size: 14px;
+      color: rgb(86, 49, 41);
+    }
+  
+    .search-btn {
+      background: none;
+      border: none;
+      padding: 0;
+      margin: 0;
+    }
+  
+    .search-btn img {
+      width: 20px;
+      height: 20px;}
+
+    .highlight {
+      background-color: yellow;}
+    
+  </style>
+  
+  <nav class="navbar navbar-expand-lg bg-body-tertiary">
+      <div class="container-fluid">
+  
+          <nav class="navbar bg-body-tertiary">
+              <div class="container">
+                  <a class="navbar-brand" href="http://127.0.0.1:5501/parallax.html" target="_blank">
+                      <img src="Untitled83_20230929164433.png" alt="Bootstrap" width="30" height="24">
+                      Aucशन
+                  </a>
+              </div>
+          </nav>
+  
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+              data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+              aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
+            <form class="d-flex" role="search" onsubmit="performSearch(); return false;">
+                <input class="form-control me-2" type="search" id="searchInput" placeholder="Search by Keyword" aria-label="Search">
+                <button class="search-btn" type="submit">
+                    <img src="search.png" alt="Search Icon">
+                </button>
+            </form>
+        </div>
+    </div>
+</nav>
+  
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+      crossorigin="anonymous"></script>
+
+<!-- SCRIPT FOR SEARCH BUTTON -->
+<script>
+  function performSearch() {
+    var keyword = document.getElementById('searchInput').value.toLowerCase();
+    var paragraphs = document.querySelectorAll('.sec p'); 
+
+    paragraphs.forEach(function (paragraph) {
+        var paragraphText = paragraph.textContent.toLowerCase();
+
+        var regex = new RegExp(keyword, 'gi');
+
+        var highlightedText = paragraphText.replace(regex, function (match) {
+            return '<span class="highlight">' + match + '</span>';
+        });
+
+        paragraph.innerHTML = highlightedText;
+    });
+}
+
+</script>
+
+<!-- ROUNDS DISPLAY -->
+
+<style>
+    .rounded-img-container {
+        display: flex;
+        justify-content: space-around;
+        flex-wrap: wrap;
+        margin: 20px 0; 
+    }
+
+    .rounded-img-container .rounded-img {
+        flex: 0 0 calc(18% - 15px); 
+        margin: 10px;
+        overflow: hidden;
+        border-radius: 50%;
+        transition: transform 0.3s ease;
+    }
+
+    .rounded-img-container .rounded-img img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        border-radius: 50%;
+        cursor: pointer;
+    }
+
+    .rounded-img-container .rounded-img:hover {
+        transform: scale(0.9);
+    }
+</style>
+
+<!-- ITEMS -->
+
+<div class="container">
+<div class="rounded-img-container">
+    <!-- Item 1 -->
+    <div class="rounded-img">
+        <img src="https://th.bing.com/th/id/R.9893ace9a43388c3f7bfabfebdf6e784?rik=jZLyM8%2b%2fydtVHw&riu=http%3a%2f%2f1.bp.blogspot.com%2f-eA_p4L_nZkc%2fTlVJNpej2NI%2fAAAAAAAABOA%2fKdUUUpyUZmk%2fs1600%2fnecklace-zoom-DSC_9797.jpg&ehk=BQOvs%2bEbgckC%2fJlZoZqZ9o95%2fZfqMPS3XFFfZgukbv8%3d&risl=&pid=ImgRaw&r=0" alt="jewellery" class="img-fluid rounded">
+    </div>
+
+    <!-- Item 2 -->
+    <div class="rounded-img">
+        <img src="https://th.bing.com/th/id/R.616375550d41b152f88276e9de34ee47?rik=ENVJQU%2b3csWEXw&riu=http%3a%2f%2fcdn2.hubspot.net%2fhubfs%2f560162%2fbigstock-Red-Diamond-On-Black-Backgroun-7398784.jpg&ehk=%2brM1xgNXe7NbN77J%2fzf3cbiDq
+
+E6QEN%2fh3d4K14iYkq4%3d&risl=&pid=ImgRaw&r=0" alt="gems" class="img-fluid rounded">
+    </div>
+
+    <!-- Item 3 -->
+    <div class="rounded-img">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQKAlpKqA9HetTFJLFlslMp_JrhH4IOvP7ihA&usqp=CAU" alt="paintings" class="img-fluid rounded">
+    </div>
+
+    <!-- Item 4 -->
+    <div class="rounded-img">
+        <img src="https://m.media-amazon.com/images/I/51S-uHIx5sL._AC_UF894,1000_QL80_.jpg" alt="sculptures" class="img-fluid rounded">
+    </div>
+
+    <!-- Item 5 -->
+    <div class="rounded-img">
+        <img src="https://vid.alarabiya.net/images/2023/04/10/3e3b60ff-4ffb-4a56-8cd6-df1cc5f00b09/3e3b60ff-4ffb-4a56-8cd6-df1cc5f00b09.jpg?crop=1:1&width=1000" alt="watches" class="img-fluid rounded">
+    </div>
+</div>
+</div>
+
+<div class="container">
+<div class="rounded-img-container">
+    <!-- Item 1 -->
+    <div class="rounded-img">
+        <img src="https://img.freepik.com/premium-photo/throne-pharaoh-black-room-interior_129911-4844.jpg" alt="Furniture" class="img-fluid rounded">
+    </div>
+
+    <!-- Item 2 -->
+    <div class="rounded-img">
+        <img src="https://wallpapercave.com/wp/wp2914014.jpg" alt="Guns" class="img-fluid rounded">
+    </div>
+
+    <!-- Item 3 -->
+    <div class="rounded-img">
+        <img src="https://w0.peakpx.com/wallpaper/854/927/HD-wallpaper-cv11-limousine-classic-car-black-old-timer-france-auto-front-citroen-frontal-blue-night.jpg" alt="Cars" class="img-fluid rounded">
+    </div>
+
+    <!-- Item 4 -->
+    <div class="rounded-img">
+        <img src="https://static.vecteezy.com/system/resources/previews/025/140/257/large_2x/man-holding-of-old-indonesian-banknotes-rp-10-00-issued-in-1963-old-rupiah-currency-concept-isolated-on-a-black-background-top-view-free-photo.jpg" alt="Currency" class="img-fluid rounded">
+    </div>
+
+    <!-- Item 5 -->
+    <div class="rounded-img">
+        <img src="https://media.istockphoto.com/id/537842594/photo/luxury-gold-leather-handbag-isolated-on-black-background.jpg?s=612x612&w=0&k=20&c=rh5HwHSw-Hz7Q6lKL-W8zdcwYoT_3gCH1I_ZhUO7sGY=" alt="Handbags" class="img-fluid rounded">
+    </div>
+</div>
+</div>
+
+<div class="container">
+<div class="rounded-img-container">
+    <!-- Item 1 -->
+    <div class="rounded-img">
+        <img src="https://img.freepik.com/premium-photo/luxury-vintage-home-room-interior-black-gold-living-room-with-mirror-sofa-candelabra-antique-background-with-elegant-furniture-concept-vintage-copyright-space-site-banner_289152-3800.jpg" alt="Mirrors" class="img-fluid rounded">
+    </div>
+
+    <!-- Item 2 -->
+    <div class="rounded-img">
+        <img src="https://img.pikbest.com/origin/09/18/50/27ypIkbEsTcM5.png!w700wp" alt="Lamp" class="img-fluid rounded">
+    </div>
+
+    <!-- Item 3 -->
+    <div class="rounded-img">
+        <img src="https://img.freepik.com/premium-photo/stack-old-books-black-background_123211-1643.jpg" alt="Books" class="img-fluid rounded">
+    </div>
+
+    <!-- Item 4 -->
+    <div class="rounded-img">
+        <img src="https://t3.ftcdn.net/jpg/01/21/05/96/360_F_121059694_0UvSFMT4l6UaCuQ3ooTGJEE4k50E29Zs.jpg" alt="Coins" class="img-fluid rounded">
+    </div>
+
+    <!-- Item 5 -->
+    <div class="rounded-img">
+        <img src="https://imagedelivery.net/9sCnq8t6WEGNay0RAQNdvQ/UUID-cl9bju1jd0749qgofqlnquzy6/public" alt="Weapons" class="img-fluid rounded">
+    </div>
+</div>
+</div>
+
+<div class="container">
+<div class="rounded-img-container">
+    <!-- Item 1 -->
+    <div class="rounded-img">
+        <img src="https://rare-gallery.com/uploads/posts/865876-Retro-Black-background-Telephone.jpg" alt="Phone" class="img-fluid rounded">
+    </div>
+
+    <!-- Item 2 -->
+    <div class="rounded-img">
+        <img src="https://png.pngtree.com/background/20230516/original/pngtree-an-ornate-box-with-metal-detail-on-a-black-background-picture-image_2600858.jpg" alt="Box" class="img-fluid rounded">
+    </div>
+
+    <!-- Item 3 -->
+    <div class="rounded-img">
+        <img src="https://img.freepik.com/premium-photo/stacking-gold-coin-treasure-chest-black-background_185126-818.jpg" alt="Chest" class="img-fluid rounded">
+    </div>
+
+    <!-- Item 4 -->
+    <div class="rounded-img">
+        <img src="https://codesustain.in/cdn/shop/products/luxury-brass-wine-glasses-set-of-2-412_800x.png?v=1682046895" alt="Wine" class="img-fluid rounded">
+    </div>
+
+    <!-- Item 5 -->
+    <div class="rounded-img">
+        <img src="https://th.bing.com/th/id/OIP.2nOQJgOITNmNQcs8KwX7FQHaFj?rs=1&pid=ImgDetMain" alt="Diamond" class="img-fluid rounded">
+    </div>
+</div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+<!-- FOOTER -->
+<br> <br>
+<footer>
+    <div class="container">
+        <div class="footer-content">
+            <h3>Contact Us</h3>
+            <p>Email: Aucशन@gmail.com</p>
+            <p>Phone:+91 1234567890</p>
+            <p>Address: 123, Model Town, XYZ Nagar, Rajpura</p>
+        </div>
+        <div class="footer-content">
+            <h3>Quick Links</h3>
+             <ul class="list">
+                <li><a href="http://127.0.0.1:5501/parallax.html">Home</a></li>
+                <li><a href="#sec">About</a></li>
+                <li><a href="http://127.0.0.1:5501/Auction.html" target="_blank">Services</a></li>
+                <li><a href="http://127.0.0.1:5501/Auction.html" target="_blank">Products</a></li>
+                <li><a href="https://mail.google.com/mail/u/0/#inbox" target="_blank">Contact</a></li>
+             </ul>
+        </div>
+        <div class="footer-content">
+            <h3>Follow Us</h3>
+            <ul class="social-icons">
+  
+             <li><a href="https://www.facebook.com/" target="_blank"><img src="https://webstockreview.net/images/white-facebook-icon-png-4.png" alt="Facebook" style="height: 20px; width: 20px;"></i></a></li>
+  
+             <li><a href="https://twitter.com/login" target="_blank"><img src="https://www.pinclipart.com/picdir/big/578-5789236_twitter-clipart.png" alt="x" style="height: 17px; width: 20px;"></a></li>
+  
+             <li><a href="https://www.instagram.com/" target="_blank"><img src="https://www.pngkey.com/png/full/1-19361_watercolor-instagram-icon-png-instagram-logo-white-on.png" alt="instagram" style="height: 17px; width: 17px;"></a></li>
+  
+             <li><a href="https://www.youtube.com/" target="_blank"><img src="https://th.bing.com/th/id/R.3cfbc995df96e1ace93e0d23e5884b3e?rik=7N4nANscprreig&riu=http%3a%2f%2fclipart-library.com%2fimages%2fdc4LABqni.png&ehk=wMo4WyijaHWTJt1nMQKvD06j9%2fjkDwXAO%2btufnjfRwU%3d&risl=&pid=ImgRaw&r=0" alt="yt" style="height: 15px; width: 20px;"></a></li>
+            </ul>
+            
+            </div>
+    </div>
+    <div class="bottom-bar">
+        <p>&copy; 2023 Aucशन . All rights reserved</p>
+    </div>
+  </footer>
+  
+
+</body>
+</html>

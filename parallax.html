@@ -1,0 +1,523 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Aucशन</title>
+    <link rel="icon" href="./Untitled83_20230929164433.png">
+    <link rel="stylesheet" type="text/css" href="parallax.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+</head>
+
+<body>
+
+  <style>
+    .custom-btn {
+      z-index: 100;
+      display: inline-block;
+      padding: 8px 16px;
+      background-color: black;
+      color: white;
+      text-decoration: none;
+      transition: background-color 0.3s, color 0.3s;
+      border-radius: 5px;
+    }
+
+    .custom-btn:hover {
+      background-color: white;
+      color: black;
+    }
+
+    .overlay {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.5);
+      justify-content: center;
+      align-items: center;
+      z-index: 100
+    }
+
+    .popup {
+      background-color: rgb(255, 255, 255);
+      padding: 20px;
+      width: 400px;
+      margin: 0 auto;
+      display: none;
+      z-index: 100;
+      border-radius: 10px;
+    }
+  </style>
+
+  <nav class="navbar2 bg-body-tertiary">
+    <form class="container-fluid d-flex justify-content-end">
+
+      <a class="custom-btn rounded mt-2 me-2" id="loginButton">Log In</a>
+      
+      <a class="custom-btn btn-sm rounded mt-2 ms-2" id="signupButton">Sign Up</a>
+    </form>
+  </nav>
+
+  <!-- Script to load the login popup -->
+  <script>
+    document.getElementById('loginButton').addEventListener('click', function () {
+
+      fetch('/login popup.html')
+        .then(response => response.text())
+        .then(data => {
+          document.body.insertAdjacentHTML('beforeend', data);
+          document.getElementById('overlay').style.display = 'flex';
+          document.getElementById('loginPopup').style.display = 'block';
+        })
+        .catch(error => console.error('Error loading login popup content:', error));
+    });
+  </script>
+
+  <!-- Script to load the signup popup -->
+  <script>
+    document.getElementById('signupButton').addEventListener('click', function () {
+
+      fetch('/signup popup.html')
+        .then(response => response.text())
+        .then(data => {
+          document.body.insertAdjacentHTML('beforeend', data);
+          document.getElementById('overlay').style.display = 'flex';
+          document.getElementById('signupPopup').style.display = 'block';
+        })
+        .catch(error => console.error('Error loading signup popup content:', error));
+    });
+  </script>
+
+  <!-- JavaScript to hide the popup when clicking outside of it -->
+  <script>
+    document.addEventListener('click', function (event) {
+      if (event.target.closest('.overlay') && !event.target.closest('.popup')) {
+        document.querySelector('.overlay').style.display = 'none';
+        document.querySelector('.popup').style.display = 'none';
+      }
+    });
+  </script>
+  
+<!-- NAVBAR -->
+
+<style>
+    .navbar {
+      background-color: #f8f9fa;
+    }
+  
+    .navbar-brand {
+      font-weight: bold;
+      font-size: 24px;
+      margin-right: 90px;
+      font-family: 'Arial Black', sans-serif;
+      color: black;
+    }
+  
+    .navbar-brand img {
+      width: 40px;
+      height: 32px;
+    }
+  
+    .navbar-nav .nav-link {
+      font-family: 'Times New Roman', serif;
+      font-size: 20px;
+      color: rgb(86, 49, 41);
+    }
+  
+    .navbar-nav .nav-link:hover {
+      text-decoration: underline;
+    }
+  
+    .form-control {
+      width: 250px;
+      font-size: 14px;
+      color: rgb(86, 49, 41);
+    }
+  
+    .search-btn {
+      background: none;
+      border: none;
+      padding: 0;
+      margin: 0;
+    }
+  
+    .search-btn img {
+      width: 20px;
+      height: 20px;}
+
+    .highlight {
+      background-color: yellow;}
+    
+  </style>
+  
+  <nav class="navbar navbar-expand-lg bg-body-tertiary">
+      <div class="container-fluid">
+  
+          <nav class="navbar bg-body-tertiary">
+              <div class="container">
+                  <a class="navbar-brand" href="#">
+                      <img src="Untitled83_20230929164433.png" alt="Bootstrap" width="30" height="24">
+                      Aucशन
+                  </a>
+              </div>
+          </nav>
+  
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+              data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+              aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+              <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                  <li class="nav-item me-5">
+                      <a class="nav-link active" aria-current="page" href="#auctions">Upcoming</a>
+                  </li>
+                  <li class="nav-item me-5">
+                      <a class="nav-link" href="#trending">Trending</a>
+                  </li>
+                  <li class="nav-item me-5">
+                      <a class="nav-link" href="#locs">Locations</a>
+                  </li>
+                  <li class="nav-item me-5">
+                      <a class="nav-link" href="#sec" target="_blank">About</a>
+                  </li>
+                  <li class="nav-item me-5">
+                      <a class="nav-link" href="#footer">Contact</a>
+                  </li>
+              </ul>
+              <form class="d-flex" role="search" onsubmit="performSearch(); return false;">
+                <input class="form-control me-2" type="search" id="searchInput" placeholder="Search by Keyword" aria-label="Search">
+                <button class="search-btn" type="submit">
+                    <img src="search.png" alt="Search Icon">
+                </button>
+            </form>
+          </div>
+      </div>
+  </nav>
+  
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+      crossorigin="anonymous"></script>
+
+<!-- SCRIPT FOR SEARCH BUTTON -->
+<script>
+  function performSearch() {
+    var keyword = document.getElementById('searchInput').value.toLowerCase();
+    var paragraphs = document.querySelectorAll('.sec p'); 
+
+    paragraphs.forEach(function (paragraph) {
+        var paragraphText = paragraph.textContent.toLowerCase();
+
+        var regex = new RegExp(keyword, 'gi');
+
+        var highlightedText = paragraphText.replace(regex, function (match) {
+            return '<span class="highlight">' + match + '</span>';
+        });
+
+        paragraph.innerHTML = highlightedText;
+    });
+}
+
+</script>
+
+<!-- PARALLAX -->
+
+<section>
+    <img src="background2.png" id="background">
+    <img src="stars.png" id="stars">
+    <img src="aucauc.png" id="aucauc">
+    <img src="mountains_behind.png" id="mountains_behind">
+    <h2 id="text"> Aucशन </h2>
+    <a href="http://127.0.0.1:5501/Auction.html" id="btn" target="_blank"> EXPLORE </a>
+    <img src="mountains_front.png" id="mountains_front">
+    
+</section>
+
+<!-- TEXT About -->
+
+<div class="sec" id="sec">
+    <h2>About Us</h2> <br> <br>
+    <p> Welcome to Aucशन, your premier destination for an exhilarating online bidding experience. Immerse yourself in the world of auctions from the comfort of your own space, where bidding meets convenience. Whether you're a seasoned bidder or exploring the excitement for the first time, our platform offers a seamless and user-friendly interface designed to make online bidding a thrilling adventure. <br> <br>
+    At Aucशन, we bring together a diverse array of auctions, featuring everything from rare collectibles to cutting-edge technology.Explore curated listings, engage with fellow bidders, and discover unique items that cater to your interests. Our secure and transparent bidding process ensures a fair and enjoyable experience for all participants, fostering a vibrant community of enthusiasts who share a passion for the art of bidding. <br> <br> 
+    Join us on Aucशन and redefine the way you bid and win. Whether you're seeking one-of-a-kind treasures or looking to sell your prized possessions, our dynamic platform provides a dynamic marketplace that connects buyers and sellers worldwide. Elevate your online bidding journey with Aucशन - where every bid tells a story, and every win is a testament to the excitement of the auction. Bid, win, and become a part of our thriving community today! </p>
+</div>
+
+<script>
+    let stars = document.getElementById('stars');
+    let aucauc = document.getElementById('aucauc');
+    let mountains_behind = document.getElementById('mountains_behind');
+    let text = document.getElementById('text');
+    let btn = document.getElementById('btn');
+    let mountains_front = document.getElementById('mountains_front');
+
+    window.addEventListener('scroll', function(){
+        let value = window.scrollY;
+        stars.style.left = value * 0.25 + 'px';
+        aucauc.style.top = value * 1.05 + 'px';
+        mountains_behind.style.top = value * 0.45 + 'px';
+        mountains_front.style.left = value * 0 + 'px';
+        text.style.marginRight = value * 2 + 'px';
+        text.style.marginTop = value * 1.25 + 'px';
+        btn.style.marginTop = value * 1.25 + 'px';
+    })
+    
+</script>
+
+<!-- UPCOMING -->
+
+<h2 id="auctions"; style="margin-left: 50px; color: rgb(89, 86, 82); font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;"> <br>  &nbsp; &nbsp; &nbsp; UPCOMING AUCTIONS </h2>
+
+<style>
+  .custom-container {
+      background-color: #f2f2f2; 
+      font-size: 12px; 
+      display: flex;
+      justify-content: center;
+      align-items: center; 
+      padding: 20px; 
+      margin-top: 10px;
+      gap: 20px; 
+      margin-left: 25px; 
+      width: 48%; 
+      transition: background-color 0.3s ease; 
+  }
+
+  .custom-container:hover {
+      background-color: #d9d9d9; 
+  }
+
+  .custom-container img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+      transition: transform 0.3s ease; 
+  }
+
+  .custom-container:hover img {
+      transform: scale(1.1); 
+  }
+
+  .custom-container div {
+      margin-left: 20px; 
+  }
+
+    
+</style>
+
+<div class="container mt-5" style="margin-left: 50px;">
+  <div class="row">
+      <!-- First Image and Description -->
+      <div class="col-md-6 custom-container">
+          <img src="..\OIP.jpg" alt="Image 1" class="img-fluid">
+          <div>
+              <h2>17 Oct - 31 Oct</h2>
+              <p>
+                  An exclusive collection of mind-blowing oil paintings.
+              </p>
+          </div>
+      </div>
+
+      <!-- Second Image and Description -->
+      <div class="col-md-6 custom-container">
+          <img src="..\staarry sky.jpg" alt="Image 2" class="img-fluid">
+          <div>
+              <h2>1 Nov - 7 Nov</h2>
+              <p>
+                  The famous Starry Night by Vincent van Gogh
+              </p>
+          </div>
+      </div>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-ez5F2iKQ8mRdhRl2jKCLqkEZLlcRAd4w8a4uK4fcOtF9gy8j9p3grlC5SkPVZ9Q" crossorigin="anonymous"></script>
+<br> <br>
+<!-- TRENDING ITEMS -->
+<div>
+  <h2 id="trending" style="margin-left: 50px; color: rgb(89, 86, 82); font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;">
+      <br> &nbsp; &nbsp; &nbsp; TRENDING ITEMS
+  </h2>
+</div>
+
+<style>
+  .custom-container3 {
+      align-items: center;
+      background-color: #f2f2f2;
+      display: flex;
+      flex-direction: column; 
+      justify-content: space-between;
+      padding: 20px;
+      margin-top: 20px;
+      gap: 20px;
+      margin-right: 10px;
+      width: 30%;
+      transition: background-color 0.3s ease;
+      text-align: center; 
+  }
+
+  .custom-container3:hover {
+      background-color: #d9d9d9;
+  }
+
+  .custom-container3 img {
+      width: 90%;
+      height: 450px; 
+      object-fit: cover;
+      transition: transform 0.3s ease;
+  }
+
+  .custom-container3:hover img {
+      transform: scale(1.1);
+  }
+
+  .custom-container3 p {
+      margin-top: 10px;
+      font-size: 18px; 
+      color: #555; 
+  }
+</style>
+
+<div class="container3 mt-5" style="margin-left: 100px;">
+  <div class="row">
+      <!-- First Image -->
+      <div class="col-md-4 custom-container3">
+          <img src="../mona lisa.jpg" alt="monalisa" class="img-fluid">
+          <p> ESTIMATE <br> USD 908M - USD 1B  </p>
+      </div>
+
+      <!-- Second Image -->
+      <div class="col-md-4 mt-4 custom-container3">
+          <img src="../girl with pearl earrings.jpg" alt="girlwithpearl" class="img-fluid">
+          <p>ESTIMATE <br> USD 100M - USD 120M </p>
+      </div>
+
+      <!-- Third Image -->
+      <div class="col-md-4 mt-4 custom-container3">
+          <img src="../scream.jpg" alt="scream" class="img-fluid">
+          <p> ESTIMATE <br> USD 120M - USD 150M  </p>
+      </div>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-ez5F2iKQ8mRdhRl2jKCLqkEZLlcRAd4w8a4uK4fcOtF9gy8j9p3grlC5SkPVZ9Q" crossorigin="anonymous"></script>
+
+
+<br> <br>
+<!-- LOCATIONS -->
+
+<div> 
+  <h2 id="locs"; style="margin-left: 50px; color: rgb(89, 86, 82); font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;"> <br>  &nbsp; &nbsp; &nbsp; LOCATIONS </h2>
+</div>
+<style>
+  .custom-container2 {
+      align-content: center;
+      background-color: #f2f2f2;
+      display: flex;
+      justify-content: space-between;
+      padding: 20px;
+      margin-top: 10px;
+      gap: 10px; 
+      transition: background-color 0.3s ease;
+  }
+
+  .custom-container2:hover {
+      background-color: #ffffff;
+  }
+
+  .custom-container2 img {
+      width: 100%;
+      height: 100px; 
+      object-fit: cover;
+      transition: transform 0.3s ease;
+  }
+
+  .custom-container2:hover img {
+      transform: scale(1.1);
+  }
+
+  .custom-container2:not(:first-child) {
+      margin-left: 25px; 
+  }
+</style>
+
+<div class="container2 mt-5" style="margin-left: 100px;"> 
+  <div class="row">
+      <!-- First Image -->
+      <div class="col-md-2 mt-4 custom-container2">
+          <img src="https://i.natgeofe.com/k/42e832f5-fd48-43ff-b338-091bdf4048ca/india-tajmahal.jpg?w=1200" alt="Taj Mahal India" class="img-fluid">
+      </div>
+
+      <!-- Second Image -->
+      <div class="col-md-2 mt-4 custom-container2">
+          <img src="https://aws-tiqets-cdn.imgix.net/images/content/b3f321f3770643ada7b10a1ac63ae6dd.jpg?auto=format&fit=crop&ixlib=python-1.1.2&q=70&s=2a07005bdf95ec6d00ed031b81503ece" alt="Dubai" class="img-fluid">
+      </div>
+
+      <!-- Third Image -->
+      <div class="col-md-2 mt-4 custom-container2">
+          <img src="https://th.bing.com/th/id/R.1c45ff344773fb085f5b555d9a72e949?rik=PS6XHz4xPRAEgQ&riu=http%3a%2f%2fancientworldwonders.com%2fuploads%2fPyramids_of_Giza.jpg&ehk=etzi7rqznIqK%2bm2C7WEMGxNAsFIWutT5Nr6j136V6BU%3d&risl=&pid=ImgRaw&r=0" alt="Egypt" class="img-fluid">
+      </div>
+
+      <!-- Fourth Image -->
+      <div class="col-md-2 mt-4 custom-container2">
+          <img src="https://th.bing.com/th/id/OIP.I-DqEWlOJsMCGKFFBlIG7gAAAA?pid=ImgDet&rs=1" alt="Paris" class="img-fluid">
+      </div>
+
+      <!-- Fifth Image -->
+      <div class="col-md-2 mt-4 custom-container2">
+          <img src="https://www.americamagazine.org/sites/default/files/main_image/iStock-476825760.jpg" alt="New York" class="img-fluid">
+      </div>
+  </div>
+</div>
+
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-ez5F2iKQ8mRdhRl2jKCLqkEZLlcRAd4w8a4uK4fcOtF9gy8j9p3grlC5SkPVZ9Q" crossorigin="anonymous"></script>
+
+<br><br>
+<!-- FOOTER -->
+
+<footer>
+  <div class="container" id="footer">
+      <div class="footer-content">
+          <h3>Contact Us</h3>
+          <p>Email: Aucशन@gmail.com</p>
+          <p>Phone:+91 1234567890</p>
+          <p>Address: 123, Model Town, XYZ Nagar, Rajpura</p>
+      </div>
+      <div class="footer-content">
+          <h3>Quick Links</h3>
+           <ul class="list">
+              <li><a href="http://127.0.0.1:5501/parallax.html">Home</a></li>
+              <li><a href="#sec">About</a></li>
+              <li><a href="http://127.0.0.1:5501/Auction.html" target="_blank">Services</a></li>
+              <li><a href="http://127.0.0.1:5501/Auction.html" target="_blank">Products</a></li>
+              <li><a href="https://mail.google.com/mail/u/0/#inbox" target="_blank">Contact</a></li>
+           </ul>
+      </div>
+      <div class="footer-content">
+          <h3>Follow Us</h3>
+          <ul class="social-icons">
+
+           <li><a href="https://www.facebook.com/" target="_blank"><img src="https://webstockreview.net/images/white-facebook-icon-png-4.png" alt="Facebook" style="height: 20px; width: 20px;"></i></a></li>
+
+           <li><a href="https://twitter.com/login" target="_blank"><img src="https://www.pinclipart.com/picdir/big/578-5789236_twitter-clipart.png" alt="x" style="height: 17px; width: 20px;"></a></li>
+
+           <li><a href="https://www.instagram.com/" target="_blank"><img src="https://www.pngkey.com/png/full/1-19361_watercolor-instagram-icon-png-instagram-logo-white-on.png" alt="instagram" style="height: 17px; width: 17px;"></a></li>
+
+           <li><a href="https://www.youtube.com/" target="_blank"><img src="https://th.bing.com/th/id/R.3cfbc995df96e1ace93e0d23e5884b3e?rik=7N4nANscprreig&riu=http%3a%2f%2fclipart-library.com%2fimages%2fdc4LABqni.png&ehk=wMo4WyijaHWTJt1nMQKvD06j9%2fjkDwXAO%2btufnjfRwU%3d&risl=&pid=ImgRaw&r=0" alt="yt" style="height: 15px; width: 20px;"></a></li>
+          </ul>
+          
+          </div>
+  </div>
+  <div class="bottom-bar">
+      <p>&copy; 2023 Aucशन . All rights reserved</p>
+  </div>
+</footer>
+
+
+</body>
+</html>

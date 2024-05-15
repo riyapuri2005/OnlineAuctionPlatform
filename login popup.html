@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aucशन LogIn</title>
+    <link rel="icon" type="image/png" href="..\Untitled83_20230929164433.png">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #ffffff;
+        }
+
+        /* Style for the overlay */
+        .overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            justify-content: center;
+            align-items: center;
+            z-index: 100;
+        }
+
+        /* Style for the popup */
+        .popup {
+            background-color: rgb(255, 255, 255);
+            padding: 20px;
+            width: 400px;
+            margin: 0 auto;
+            display: none;
+            z-index: 100;
+        }
+
+        /* Style for the show popup link */
+        #showPopup {
+            cursor: pointer;
+            color: blue;
+            text-decoration: underline;
+        }
+/* old styles */
+
+.form h2 {
+  color: #333;
+  font-size: 24px;
+}
+
+
+.form label {
+  color: rgb(86, 49, 41);
+  display: block;
+  text-align: left;
+  margin: 10px;
+}
+
+.form {
+  text-align: center;
+  height: 200px;
+}
+
+.form input {
+  width: 80%;
+  padding: 10px;
+  border: 1px solid #ccc;
+}
+
+.lbutton {
+  width: 100%;
+  height: 45px;
+  background-color:rgb(0, 0, 0);
+  color: white;
+}
+  
+.lbutton:hover {
+  color: black;
+  background-color: #ffffff;
+}
+
+    </style>
+</head>
+
+<body>
+
+    <!-- The overlay and popup -->
+    <div class="overlay" id="overlay">
+        <div class="popup" id="loginPopup">
+            <!-- Your login form -->
+            <div class="login-page">
+                <div class="form">
+            
+                  <h2>Login!</h2>
+            
+                <form>
+            
+                    <label for="username"> &nbsp;&nbsp;&nbsp; Username</label>
+                    <input type="text" id="username" name="username" placeholder="Enter username" required> 
+                    <label for="password"> &nbsp;&nbsp;&nbsp; Password</label>
+                    <input type="password" id="password" name="password" placeholder="Enter password" required> 
+                </div> <br>
+            
+                    <p style="color: rgb(144, 141, 137);" align="left"> &nbsp; Remember me <input type="checkbox" name="remember" id="remember"> 
+            
+                      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                      <a href="https://google.com/" target="_blank" style="color: inherit;">Forgot Password</a> </p>
+            
+                   <button class="lbutton" type="submit"> Log In </button>
+            
+                  <p style="color: rgb(144, 141, 137);" align="center"> <br> Not a member? 
+                  <a href="http://127.0.0.1:5500/signup.html" target="_blank" style="color: inherit;"> Sign up now! </a> </p>
+            
+                  <center><img src="orlogo.png"height="29" style="opacity: 50%;" align="center"> <br> </center> <br>
+                  
+                  <button type="button" style="height: 45px; width: 100%; background-color: rgb(255, 76, 76);color: white; border-color: rgb(255, 76, 76); margin-bottom: 5px;"> <a href="https://www.google.co.in/" target="_blank" style="color: inherit; text-decoration: none;"> <img src="https://pngshare.com/wp-content/uploads/2021/06/Google-Logo-White-21.png" style="height: 15px; width: 15px; margin-left: 15px;" align="left"> &nbsp; Continue with Google </a></button>
+            
+                  <button type="button" style="height: 45px; width: 100%; background-color: rgb(43, 19, 119);color: white; border-color: rgb(42, 44, 176); margin-bottom: 5px"> <a href="https://www.facebook.com/" target="_blank" style="color: inherit; text-decoration: none;"> <img src="https://webstockreview.net/images/white-facebook-icon-png-4.png" style="height: 20px; width: 20px; margin-left: 10px;" align="left"> &nbsp; Continue with Facebook </a></button>
+            
+                  <button type="button" style="height: 45px; width: 100%; background-color: rgb(43, 202, 255);color: white; border-color: rgb(42, 158, 224); margin-bottom: 5px"> <a href="https://twitter.com/?lang=en-in" target="_blank" style="color: inherit; text-decoration: none;"> <img src="https://www.pinclipart.com/picdir/big/578-5789236_twitter-clipart.png" style="height: 15px; width: 17px; margin-left: 15px;" align="left"> &nbsp; Continue with Twitter </a></button>
+            
+                </form>
+                
+        </div>
+    </div>
+    <script>
+        // JavaScript to toggle the visibility of the popup
+        document.getElementById('showloginPopup').addEventListener('click', function () {
+            document.getElementById('overlay').style.display = 'flex';
+            document.getElementById('Popup').style.display = 'block';
+        });
+
+        // JavaScript to hide the popup when clicking outside of it
+        document.getElementById('overlay').addEventListener('click', function (event) {
+            if (event.target === this) {
+                document.getElementById('overlay').style.display = 'none';
+                document.getElementById('Popup').style.display = 'none';
+            }
+        });
+
+    </script>
+</body>
+
+</html>
